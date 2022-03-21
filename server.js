@@ -3,8 +3,8 @@ exports.__esModule = true;
 var http = require("http");
 var fs = require("fs");
 var mime = require("mime-types");
-var hostname = 'localhost';
-var port = 3000;
+var hostname = 'webd6201-ice.herokuapp.com';
+var port = process.env.PORT || 80;
 var lookup = mime.lookup; // alias for mime.lookup
 // create a server object (Immutable)
 var server = http.createServer(function (req, res) {
