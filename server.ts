@@ -4,7 +4,7 @@ import * as url from 'url';
 import * as mime from 'mime-types';
 
 const hostname: string = 'webd6201-ice.herokuapp.com';
-const port = process.env.PORT || 80
+const port = process.env.PORT || 8080
 let lookup = mime.lookup; // alias for mime.lookup
 
 // create a server object (Immutable)
