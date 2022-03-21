@@ -4,7 +4,7 @@ import * as url from 'url';
 import * as mime from 'mime-types';
 
 const hostname: string = 'localhost';
-const port: number = 3000;
+const port = process.env.PORT || 80
 let lookup = mime.lookup; // alias for mime.lookup
 
 // create a server object (Immutable)
