@@ -1,32 +1,98 @@
+#!/usr/bin/env node
 "use strict";
-exports.__esModule = true;
-var http = require("http");
-var fs = require("fs");
-var mime = require("mime-types");
-var hostname = 'webd6201-ice.herokuapp.com';
-var port = process.env.PORT || 80;
-var lookup = mime.lookup; // alias for mime.lookup
-// create a server object (Immutable)
-var server = http.createServer(function (req, res) {
-    var parsedURL = new URL(req.url, "http://" + hostname + ":" + port);
-    var path = parsedURL.pathname.replace(/^\/+|\/+$/g, "");
-    if (path == "") {
-        path = "index.html";
+/**
+ * Module dependencies.
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
     }
-    var file = __dirname + "\\" + path;
-    fs.readFile(file, function (err, content) {
-        if (err) {
-            res.writeHead(404); // file not found
-            res.end(JSON.stringify(err));
-            return;
-        }
-        res.setHeader("X-Content-Type-Options", "nosniff");
-        var mimeType = lookup(path);
-        res.writeHead(200, "", { "Content-Type": mimeType });
-        res.end(content);
-    });
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
 });
-// creating an event listener
-server.listen(port, hostname, function () {
-    console.log("Server running at http://".concat(hostname, ":").concat(port, "/"));
-});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+exports.__esModule = true;
+var app_1 = __importDefault(require("./app"));
+var debug_1 = __importDefault(require("debug"));
+(0, debug_1["default"])('temp:server');
+var http = __importStar(require("http"));
+/**
+ * Get port from environment and store in Express.
+ */
+var port = normalizePort(process.env.PORT || '3000');
+app_1["default"].set('port', port);
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app_1["default"]);
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+    return false;
+}
+/**
+ * Event listener for HTTP server "error" event.
+ */
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+    var bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+function onListening() {
+    var addr = server.address();
+    var bind = 'pipe ' + addr;
+    (0, debug_1["default"])('Listening on ' + bind);
+}
