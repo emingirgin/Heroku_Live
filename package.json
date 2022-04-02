@@ -1,11 +1,10 @@
 {
-  "name": "ICE10-EminGirgin",
+  "name": "webd6201-w2022-ice10",
   "version": "1.0.0",
-  "description": "Repo for WEBD6201 W2022 ICE10 for Emin Girgin",
+  "description": "demo project for ice10",
   "main": "server.js",
-  "author": "Emin Girgin",
+  "author": "Tom Tsiliopoulos",
   "license": "MIT",
-  "module": "CommonJS",
   "scripts": {
     "start": "node server.js"
   },
@@ -19,6 +18,7 @@
     "express": "^4.17.3",
     "http-errors": "^2.0.0",
     "jquery": "^3.6.0",
+    "mongoose": "^6.2.9",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
@@ -28,6 +28,7 @@
     "@types/express": "^4.17.13",
     "@types/http-errors": "^1.8.2",
     "@types/jquery": "^3.5.14",
+    "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.23"
   }

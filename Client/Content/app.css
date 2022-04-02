@@ -1,4 +1,3 @@
-/* Custom CSS for WEBD6201 */
 .input-group-addon:first-child
 {
     border-right: 0;
@@ -48,4 +47,4 @@
     border-color: darkgrey;
     border-radius: .4em;
     width: 100%;
-} 
+}
