@@ -29,7 +29,7 @@ const app = express();
 
 // db configuration
 import * as DBConfig from "./db";
-mongoose.connect(DBConfig.LocalURI);
+mongoose.connect(DBConfig.remoteURI);
 
 const db = mongoose.connection; // alias
 db.on("error", function()
