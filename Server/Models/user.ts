@@ -36,4 +36,5 @@ declare global
         DisplayName: String
     }
 }
-export default Model; 
+
+export default Model;

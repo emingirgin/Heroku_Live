@@ -1,5 +1,4 @@
-import express, {Request, Response, NextFunction} from 'express';
-
+import express, { Request, Response, NextFunction } from 'express';
 export function UserDisplayName(req: Request): string
 {
     if(req.user)
@@ -17,4 +16,4 @@ export function AuthGuard(req: Request, res: Response, next: NextFunction): void
         return res.redirect('/login');
     }
     next();
-} 
+}

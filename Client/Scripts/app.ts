@@ -210,7 +210,6 @@
     function DisplayLoginPage(): void 
     {
         console.log("Login Page");
-
     }
 
     function DisplayRegisterPage(): void
